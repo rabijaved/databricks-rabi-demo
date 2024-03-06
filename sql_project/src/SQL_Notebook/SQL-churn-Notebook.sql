@@ -40,7 +40,7 @@ COPY_OPTIONS ("mergeSchema" = "true")
 
 -- COMMAND ----------
 
-SELECT * FROM churn_users_bronze LIMIT 20
+SELECT * FROM uc_rabi.customer_churn_sql.churn_users_bronze LIMIT 20
 
 -- COMMAND ----------
 

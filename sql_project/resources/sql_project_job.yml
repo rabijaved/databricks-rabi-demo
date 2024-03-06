@@ -7,13 +7,13 @@ resources:
           - rabi.abbasi@databricks.com
         no_alert_for_skipped_runs: true
       schedule:
-        quartz_cron_expression: 10 55 18 * * ?
+        quartz_cron_expression: 37 31 19 * * ?
         timezone_id: Australia/Melbourne
         pause_status: UNPAUSED
       tasks:
         - task_key: SQL-churn-Notebook
           notebook_task:
-            notebook_path: /Repos/rabi.abbasi@databricks.com/databricks-rabi-demo/sql_project/src/SQL-churn-Notebook
+            notebook_path: /Repos/rabi.abbasi@databricks.com/databricks-rabi-demo/sql_project/src/SQL_Notebook/SQL-churn-Notebook
             source: WORKSPACE
           compute_key: Default
       compute:
