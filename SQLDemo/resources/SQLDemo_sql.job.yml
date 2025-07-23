@@ -1,0 +1,38 @@
+# A job running SQL queries on a SQL warehouse
+resources:
+  jobs:
+    SQLDemo_sql_job:
+      name: rabis_sql_job_${bundle.target}
+
+      trigger:
+        # Run this job every day, exactly one day from the last run; see https://docs.databricks.com/api/workspace/jobs/create#trigger
+        periodic:
+          interval: 1
+          unit: DAYS
+
+      email_notifications:
+        on_failure:
+          - rabi.abbasi@databricks.com
+
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: schema
+          default: ${var.schema}
+        - name: bundle_target
+          default: ${bundle.target}
+
+      tasks:
+        - task_key: orders_raw
+          sql_task:
+            query:
+              query_id: 44e5378e-dafc-4185-b3e2-9fb82460cafc
+            warehouse_id: ${var.warehouse_id}
+            
+        - task_key: orders_daily
+          depends_on:
+            - task_key: orders_raw
+          sql_task:
+            query:
+              query_id: f8fd79e9-7b9f-4546-b111-24582ead802f
+            warehouse_id: ${var.warehouse_id}
